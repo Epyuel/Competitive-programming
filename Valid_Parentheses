@@ -1,0 +1,16 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack=deque()
+        dic={"}":"{","]":"[",")":"("}
+        for i in range(len(s)):
+            if s[i] in "[{(":
+                stack.append(s[i])
+            elif len(stack)==0:
+                return False
+            elif s[i] in "]})":
+                if dic[s[i]]!=stack[len(stack)-1]:
+                    return False
+                elif dic[s[i]]==stack[len(stack)-1]:
+                    stack.pop()
+                    if len(stack)==0 and i==len(s)-1:
+                        return True
