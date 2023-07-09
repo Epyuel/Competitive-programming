@@ -1,0 +1,20 @@
+class Solution:
+    def totalSteps(self, nums: List[int]) -> int:
+            stack = []
+            stack.append([nums[0],0])
+            lef = 1
+            res = 0     
+            for i in range(1,len(nums)):
+                count = 1
+                while lef>0:
+                    if stack[lef-1][0]<=nums[i]:
+                        count = max(count, stack[lef-1][1]+1)
+                        stack.pop()
+                        lef -= 1
+                    else:
+                        res = count if res<count else res
+                        break
+                stack.append([nums[i],count])
+                lef += 1
+                
+            return res
